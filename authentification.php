@@ -1,12 +1,9 @@
 <?php
+    require_once "dbConnection.php";
     session_start();
 
-    $DATABASE_HOST = "localhost";
-    $DATABASE_USER = "root";
-    $DATABASE_PASS = "";
-    $DATABASE_NAME = "proiectphp";
-
-    $dbConnection = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+    $dbConnection = new dbConnection("localhost", "root", "", "proiectphp");
+    $connection = $dbConnection->connectToDb();
 
     if (mysqli_connect_errno()) {
         exit("Nu se poate conecta la MySQL: ". mysqli_connect_error());
@@ -16,7 +13,7 @@
         exit("Datele de logare nu au fost obtinute");
     }
 
-    if ($stmt = $dbConnection->prepare("SELECT userID, password FROM users WHERE username = ?")) {
+    if ($stmt = $connection->prepare("SELECT userID, password FROM users WHERE username = ?")) {
         $stmt->bind_param("s", $_POST["username"]);
         $stmt->execute();
         $stmt->store_result();
@@ -40,4 +37,3 @@
         $stmt->close();
     }
 
-?>

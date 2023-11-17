@@ -1,16 +1,9 @@
 <?php
+    require_once "dbConnection.php";
     session_start();
 
-    $DATABASE_HOST = "localhost";
-    $DATABASE_USER = "root";
-    $DATABASE_PASS = "";
-    $DATABASE_NAME = "proiectphp";
-
-    $dbConnection = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-
-    if (mysqli_connect_errno()) {
-        exit("Nu se poate conecta la MySQL: ". mysqli_connect_error());
-    }
+    $dbConnection = new dbConnection("localhost", "root", "", "proiectphp");
+    $connection = $dbConnection->connectToDb();
 
     if (!isset($_POST["username"], $_POST["email"], $_POST["password"], $_POST["passconfirm"])) {
         exit("Datele de inregistrare nu au fost obtinute");
@@ -28,11 +21,19 @@
         exit("Username-ul introdus nu este valid");
     }
 
-    if (strlen($_POST["password"]) > 30 || strlen($_POST["password"]) < 6) {
-        exit("Parola trebuie sa fie intre 6 si 30 de caractere");
+    if (strlen($_POST["username"]) > 50 || strlen($_POST["username"]) < 6) {
+        exit("Usernameul trebuie sa aiba intre 6 si 50 de caractere");
     }
 
-    if ($stmt = $dbConnection->prepare("SELECT userID, password FROM users WHERE username = ?")) {
+    if (strlen($_POST["email"]) > 100) {
+        exit("Email-ul nu trebuia sa aiba mai mult de 100 de caractere");
+    }
+
+    if (strlen($_POST["password"]) > 30 || strlen($_POST["password"]) < 6) {
+            exit("Parola trebuie sa fie intre 6 si 30 de caractere");
+        }
+
+    if ($stmt = $connection->prepare("SELECT userID, password FROM users WHERE username = ?")) {
         $stmt->bind_param("s", $_POST["username"]);
         $stmt->execute();
         $stmt->store_result();
@@ -40,7 +41,7 @@
         if ($stmt->num_rows > 0) {
             echo "Username-ul deja exista, alegeti altul";
         } else {
-            if($stmt = $dbConnection->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)")) {
+            if($stmt = $connection->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)")) {
                 $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
                 $stmt->bind_param("sss", $_POST["username"], $password, $_POST["email"]);
                 $stmt->execute();
@@ -62,6 +63,5 @@
         echo "Nu se poate face prepare statement";
     }
 
-    $dbConnection->close();
+    $connection->close();
 
-?>
