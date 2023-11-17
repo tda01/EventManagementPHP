@@ -1,5 +1,5 @@
 <?php
-    require_once "dbConnection.php";
+    require_once "dbClasses/dbConnection.php";
     session_start();
 
     $dbConnection = new dbConnection("localhost", "root", "", "proiectphp");
