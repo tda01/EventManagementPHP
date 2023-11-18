@@ -3,6 +3,8 @@ const addBtn = document.getElementById("addBtn");
 const addPopup = document.getElementById("addPopup");
 const closePopup = document.getElementById("closePopup");
 
+const logOutBtn = document.getElementById("logOut");
+
 const addSpeakerBtn = document.getElementById("addSpeaker");
 const speakerDropdown = document.querySelector(".import-speaker");
 
@@ -19,6 +21,10 @@ let dayCounter = 1;
 
 newEventBtn.addEventListener('click', () => {
     addPopup.classList.add("open-popup");
+})
+
+logOutBtn.addEventListener('click', () => {
+    window.location.href = 'login.html';
 })
 
 addBtn.addEventListener('click', () => {
