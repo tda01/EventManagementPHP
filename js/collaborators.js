@@ -10,15 +10,15 @@ newCollabBtn.addEventListener('click', () => {
     addPopup.classList.add("open-popup");
 })
 
-addCollabBtn.addEventListener('click', () => {
-    const form = document.querySelector("form");
-    form.reset();
-
-    addPopup.classList.remove("open-popup");
-})
+// addCollabBtn.addEventListener('click', () => {
+//     const form = document.querySelector("form");
+//     form.reset();
+//
+//     addPopup.classList.remove("open-popup");
+// })
 
 backBtn.addEventListener('click', () => {
-    window.location.href = 'controlPanel.html';
+    window.location.href = 'controlPanel.php';
 })
 
 closePopup.addEventListener('click', () => {

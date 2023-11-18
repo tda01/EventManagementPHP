@@ -52,7 +52,7 @@
                 $_SESSION["loggedin"] = TRUE;
                 $_SESSION["name"] = $_POST["username"];
                 $_SESSION["id"] = $newUserID;
-                header("Location: home.php");
+                header("Location: controlPanel.php");
 
             } else {
                 echo "Nu se poate face prepare statement";

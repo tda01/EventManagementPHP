@@ -26,20 +26,19 @@ button:active {
     transform: scale(0.95);
 }
 
-td button:nth-child(1) {
+.edit-button {
     background-color: #1F5F5B;
 }
 
-td button:nth-child(1):hover {
+.edit-button:hover {
     background-color: #347572;
-    color: #000;
 }
 
-td button:nth-child(2) {
+.delete-button {
     background-color: #94384B;
 }
 
-td button:nth-child(2):hover {
+.delete-button:hover {
     background-color: #A85472;
     color: #000;
 }
@@ -254,6 +253,17 @@ tr:hover td {
 .popup button:hover {
     background: #3C7D57;
 }
+
+.input[type="submit"] {
+    background: #29593D;
+}
+
+.input[type="submit"]:hover {
+    background: #3C7D57;
+}
+
+
+
 
 .flex {
     display: flex;

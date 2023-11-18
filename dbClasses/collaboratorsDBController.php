@@ -71,16 +71,21 @@ class collaboratorsDBController extends dbController
 
     }
 
-    function getCollaborator($name) {
-        $query = "SELECT * FROM collaborators WHERE name = ?";
+    function getCollaborator($collaboratorID) {
+        $query = "SELECT * FROM collaborators WHERE collaboratorID = ?";
 
         $params = array(
             array(
-                "param_type" => "s",
-                "param_value" => $name
+                "param_type" => "i",
+                "param_value" => $collaboratorID
             )
         );
         return $this->getDBResult($query, $params);
+    }
+
+    function getAllCollaborators() {
+        $query = "SELECT * FROM collaborators";
+        return $this->getDBResult($query);
     }
 
     function deleteCollaborator($collaboratorID) {
