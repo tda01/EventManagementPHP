@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Speakers</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/controlPanel.css">
+</head>
+
+<body>
+
+<div class="table">
+    <div class="table-header">
+        <p>Speakers Details</p>
+        <div>
+            <button class="new-event" id="addSpeaker">+ New Speaker</button>
+            <button class="new-event" id="backControlPanel">Back to Panel</button>
+        </div>
+    </div>
+</div>
+
+<div class="table-section">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Description</th>
+            <th>Occupation</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><img src="noimage.png" /></td>
+            <td>Alina</td>
+            <td>Cretan</td>
+            <td>cret</td>
+            <td>metin2ro</td>
+            <td>alinutcuperucret@gmail.com</td>
+            <td>
+                <button><i class="fa-solid fa-pen-to-square"></i></button>
+                <button><i class="fa-solid fa-trash"></i></button>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><img src="noimage.png" /></td>
+            <td>Gabriel</td>
+            <td>Turcul</td>
+            <td>turc</td>
+            <td>hacking</td>
+            <td>ilovemc@gmail.com</td>
+            <td>
+                <button><i class="fa-solid fa-pen-to-square"></i></button>
+                <button><i class="fa-solid fa-trash"></i></button>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td><img src="noimage.png" /></td>
+            <td>Stefan</td>
+            <td>Verde</td>
+            <td>ciupercar</td>
+            <td>ciuperci</td>
+            <td>ciuperciverzicatevrei5leibucata@gmail.com</td>
+            <td>
+                <button><i class="fa-solid fa-pen-to-square"></i></button>
+                <button><i class="fa-solid fa-trash"></i></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="popup" id="addPopup">
+    <form action="#">
+        <button class="closeBtn" id="closePopup">&times;</button>
+        <h2>Add New Speaker</h2>
+        <div>
+            <label>First Name</label>
+            <input type="text" />
+        </div>
+        <div>
+            <label>Last Name</label>
+            <input type="text" />
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="email" />
+        </div>
+        <div>
+            <label>Occupation</label>
+            <input type="text" />
+        </div>
+        <div>
+            <label>Description</label>
+            <textarea rows="5"  placeholder="Add description"></textarea>
+        </div>
+        <div>
+            <label>Image</label>
+            <input type="file" accept="image/*"/>
+        </div>
+
+        <button type="button" id="addBtn">Add Speaker</button>
+    </form>
+</div>
+
+<script src="js/speakers.js"></script>
+
+</body>
+</html>
