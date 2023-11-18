@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+
+    <link rel="stylesheet" href="css/event.css">
+</head>
+
+<body>
+
+<!-- Nav bar -->
+<header>
+    <div class="container">
+        <nav class="flex items-centre justify-between">
+            <div class="left flex justify-right">
+                <div>
+                    <a href="event.html">Home</a>
+                    <a href="eventAgenda.html">Agenda</a>
+                    <a href="eventSpeakers.html">Speakers</a>
+                    <a href="eventPartners.html">Partners</a>
+                    <a href="eventContact.html">Contact</a>
+                </div>
+            </div>
+            <div class="right">
+                <button class="btn btn-primary" id="btnControlPanel">Control Panel</button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- Event Header -->
+<div class="hero flex items-centre justify-between">
+    <div class="left flex flex-1 justify-center">
+        <img src = "noimage.png" alt="Event image">
+    </div>
+    <div class="right flex-1">
+        <h1>Evenimentul<br> <span>Anului</span></h1>
+        <div>
+            <button class="btn btn-secondary" id="btnTickets">Register 2024</button>
+        </div>
+    </div>
+</div>
+
+<!-- About Event -->
+<section class="about">
+    <div class="container flex items-centre">
+        <div class="right flex-1">
+            <h1>About <span>Event</span></h1>
+            <p>Cel mai frumix eveniment de pe lumea asta sa mor eu de nu n-ai cum sa ratezi o asa sansa in care poti
+                sa vezi si campionate de metin2ro si ciuperci si hacking in timp ce mananci mc si asculti niste muzica
+                extrem de minunata alaturi de artistul preferat de toti tinerii Coconet Palanet nu rata o asa sansa
+                ca o sa mori de ciuda ca nu ai incercat ciupercile lui Verde proaspat culese.
+            </p>
+            <h1>30 Februarie 2024<br> <span>6 PM</span></h1>
+        </div>
+    </div>
+</section>
+
+<!-- Speakers Info -->
+<section class="speakers">
+    <div class="container">
+        <h1 class="speakers-head">Featured Speakers 2024</h1>
+        <div class="card-grid">
+            <div class="card">
+                <a href="#">
+                    <img src="noimage.png">
+                </a>
+                <h2>Alinutz</h2>
+                <p>Olimpic pe sate la Metin2RO</p>
+            </div>
+            <div class="card">
+                <a href="#">
+                    <img src="noimage.png">
+                </a>
+                <h2>Turcu</h2>
+                <p>Underground Hacker</p>
+            </div>
+            <div class="card">
+                <a href="#">
+                    <img src="noimage.png">
+                </a>
+                <h2>Verde</h2>
+                <p>Cititor in ciuperci</p>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <button class="btn btn-secondary btn-speakers" id="btnSpeakers">View All Speakers</button>
+        </div>
+    </div>
+</section>
+
+<script src="js/event.js"></script>
+
+</body>
+</html>
