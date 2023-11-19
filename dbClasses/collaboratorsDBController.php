@@ -128,17 +128,13 @@ class collaboratorsDBController extends dbController
         $this->updateDB($query, $params);
     }
 
-    function removeEventCollaborator($eventID, $collaboratorID) {
-        $query = "DELETE FROM eventscollaborators WHERE eventID = ? AND  collaboratorID = ?";
+    function removeEventCollaborators($eventID) {
+        $query = "DELETE FROM eventscollaborators WHERE eventID = ?";
 
         $params = array(
             array(
                 "param_type" => "i",
                 "param_value" => $eventID
-            ),
-            array(
-                "param_type" => "i",
-                "param_value" => $collaboratorID
             )
         );
         $this->updateDB($query, $params);

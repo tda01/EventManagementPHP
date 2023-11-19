@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($firstName == "" || $lastName == "" || $email == "" || $occupation == "" ||
     $description == "" || $img == "") {
-        echo "Campurile sunt goale";
+        exit("Campurile sunt goale");
     }
     else {
         $speakersController = new speakersDBController();

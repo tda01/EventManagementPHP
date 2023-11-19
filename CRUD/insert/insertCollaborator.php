@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($name == "" || $type == "" || $email == "" || $phoneNumber == "" ||
         $website == "" || $img == "") {
-        echo "Campurile sunt goale";
+        exit("Campurile sunt goale");
     }
     else {
         $collaboratorController = new collaboratorsDBController();

@@ -9,6 +9,12 @@
         header("Location: login.html");
         exit;
     }
+
+    $eventsController = new eventDBController();
+    $speakersController = new speakersDBController();
+    $collaboratorsController = new collaboratorsDBController();
+    $allSpeakers = $speakersController->getAllSpeakers();
+    $allCollaborators = $collaboratorsController->getAllCollaborators();
 ?>
 
 
@@ -34,8 +40,9 @@
         <p>Events Details</p>
         <div>
             <button class="new-event" id="addEvent">+ New Event</button>
-            <a href="speakers.php"><button class="new-event" id="addEvent">+ Add speakers</button></a>
-            <a href="collaborators.php"><button class="new-event" id="addEvent">+ Add collaborators</button></a>
+            <a href="speakers.php"><button class="new-event" id="addEvent">Speakers</button></a>
+            <a href="collaborators.php"><button class="new-event" id="addEvent">Collaborators</button></a>
+            <a href="activities.php"><button class="new-event" id="addEvent">Activities</button></a>
             <a href="logout.php"><button class="new-event" id="addEvent"> Logout</button></a>
         </div>
     </div>
@@ -58,50 +65,48 @@
         </thead>
         <tbody>
         <?php
-            $eventsController = new eventDBController();
-            $speakersController = new speakersDBController();
-            $collaboratorsController = new collaboratorsDBController();
+
             $events = $eventsController->getAllEvents();
 
-            foreach ($events as $event) {
-                echo "<tr>";
-                echo "<td>".$event["eventID"]."</td>";
-                echo "<td>".$event["img"]."</td>";
-                echo "<td>".$event["title"]."</td>";
-                echo "<td>".$event["description"]."</td>";
-
-                $speakers = $speakersController->getEventSpeakers($event["eventID"]);
-                if (!empty($speakers)) {
-                    echo "<td>";
-                    foreach ($speakers as $speaker) {
-                        echo $speaker["firstName"]." ".$speaker["lastName"];
-                        echo "<br>";
+            if (!empty($events)) {
+                foreach ($events as $event) {
+                    echo "<tr>";
+                    echo "<td>".$event["eventID"]."</td>";
+                    echo "<td>".$event["img"]."</td>";
+                    echo "<td>".$event["title"]."</td>";
+                    echo "<td>".$event["description"]."</td>";
+                    $speakers = $speakersController->getEventSpeakers($event["eventID"]);
+                    if (!empty($speakers)) {
+                        echo "<td>";
+                        foreach ($speakers as $speaker) {
+                            echo $speaker["firstName"]." ".$speaker["lastName"];
+                            echo "<br>";
+                        }
+                        echo "</td>";
+                    } else {
+                        echo "<td>"."Nu exista"."</td>";
                     }
-                    echo "</td>";
-                } else {
-                    echo "<td>"."Nu exista"."</td>";
-                }
-                $collaborators = $collaboratorsController->getEventCollaborators($event["eventID"]);
-                if (!empty($collaborators)) {
-                    echo "<td>";
-                    foreach ($collaborators as $collaborator) {
-                        echo $collaborator["name"];
-                        echo "<br>";
+                    $collaborators = $collaboratorsController->getEventCollaborators($event["eventID"]);
+                    if (!empty($collaborators)) {
+                        echo "<td>";
+                        foreach ($collaborators as $collaborator) {
+                            echo $collaborator["name"];
+                            echo "<br>";
+                        }
+                        echo "</td>";
+                    } else {
+                        echo "<td>"."Nu exista"."</td>";
                     }
-                    echo "</td>";
-                } else {
-                    echo "<td>"."Nu exista"."</td>";
-                }
 
 
-                echo "<td>".$event["location"]."</td>";
-                echo '<td>
-                           <button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
-                           <button class="delete-button"><i class="fa-solid fa-trash"></i></button>
+                    echo "<td>".$event["location"]."</td>";
+                    echo '<td>
+                           <a href="CRUD/edit/editEvent.php?id=' . $event["eventID"] . '"><button class="edit-button"><i class="edit-button fa-solid fa-pen-to-square"></i></button></a>
+                           <a href="CRUD/delete/deleteEvent.php?id='. $event["eventID"].'"><button class="delete-button"><i class="fa-solid fa-trash"></i></button></a>
                     </td>';
-                echo "</tr>";
+                    echo "</tr>";
+                }
             }
-
         ?>
 
         </tbody>
@@ -110,62 +115,102 @@
 
 <!-- Add Event Popup -->
 <div class="popup" id="addPopup">
-    <form action="#">
+    <form action="CRUD/insert/insertActivity.php" method="post">
         <button class="closeBtn" id="closePopup">&times;</button>
         <h2>Add New Event</h2>
         <div>
             <label>Title</label>
-            <input type="text" />
+            <input type="text" name="title" required />
         </div>
         <div>
             <label>Location</label>
-            <input type="text" />
+            <input type="text" name="location" required />
         </div>
         <div>
             <label>Description</label>
-            <textarea rows="5"  placeholder="Add description"></textarea>
+            <textarea rows="5"  name="description" placeholder="Add description"></textarea>
         </div>
         <div>
             <label>Start date</label>
-            <input type="date" />
+            <input type="date" name="dateStart" required/>
             <label>End date</label>
-            <input type="date" />
+            <input type="date" name="dateEnd"/>
         </div>
         <div>
             <label>Ticket Price</label>
-            <input type="number" />
+            <input type="number" name="ticketPrice" required/>
+        </div>
+        <div>
+            <label>Ticket description</label>
+            <input type="text" name="ticketDescription" required/>
         </div>
         <div>
             <label>Image</label>
-            <input type="file" accept="image/*"/>
+            <input type="text" name="img"" required/>
         </div>
 
         <div class="speakers-partners-agenda">
             <div class="spa-header">
                 <h3>Speakers</h3>
-                <button type="button" id="addSpeaker">+</button>
             </div>
-            <div class="import-speaker"></div>
+            <div class="import-speaker">
+                <select name="speakers[]" multiple>
+                    <option value="" disabled>Select an option</option>
+                    <?php
+                    if(!empty($allSpeakers)){
+                        foreach ($allSpeakers as $speaker) {
+                            echo '<option value="' . $speaker["speakerID"] . '">' . $speaker["firstName"] . " " . $speaker["lastName"] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
 
             <div class="spa-header">
                 <h3>Partners</h3>
-                <button type="button" id="addPartner">+</button>
             </div>
-            <div class="import-partner"></div>
+            <div class="import-partner">
+                <select name="collaborators[]" multiple>
+                    <option value="" disabled>Select an option</option>
+                    <?php
+                    if(!empty($allCollaborators)){
+                        foreach ($allCollaborators as $collab) {
+                            echo '<option value="' . $collab["collaboratorID"] . '">' . $collab["name"] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
             <div class="spa-header">
-                <h3>Contacts</h3>
-                <button type="button" id="addContact">+</button>
+                <h3>Contact</h3>
             </div>
-            <div class="import-contact"></div>
+            <div class="import-contact">
+                <div>
+                    <label>First Name</label>
+                    <input type="text" name="contactFirstName" required />
+                </div>
+                <div>
+                    <label>Last Name</label>
+                    <input type="text" name="contactLastName" required />
+                </div>
+                <div>
+                    <label>Phone number</label>
+                    <input type="text" name="contactPhoneNumber" required />
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="text" name="contactEmail" required />
+                </div>
+            </div>
 
-            <div class="spa-header">
-                <h3>Agenda</h3>
-                <button type="button" id="addDay">+</button>
-            </div>
-            <div class="import-day"></div>
+<!--            <div class="spa-header">-->
+<!--                <h3>Agenda</h3>-->
+<!--                <button type="button" id="addDay">+</button>-->
+<!--            </div>-->
+<!--            <div class="import-day"></div>-->
         </div>
 
-        <button type="button" id="addBtn">Add Event</button>
+        <button type="submit" id="addBtn">Add Event</button>
     </form>
 </div>
 

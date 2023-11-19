@@ -27,13 +27,12 @@
 
         if ($firstName == "" || $lastName == "" || $email == "" || $occupation == "" ||
             $description == "" || $img == "") {
-            echo "Campurile sunt goale";
+            exit("Campurile sunt goale");
         }
         else {
             $speakersController->updateSpeaker($id, $firstName, $lastName, $description, $occupation, $email, $img);
             header("Location: /ProiectPHP/speakers.php");
         }
-
     }
 
 ?>

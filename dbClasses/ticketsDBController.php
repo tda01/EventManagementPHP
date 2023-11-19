@@ -42,7 +42,7 @@ class ticketsDBController extends dbController
 
     }
     function getEventTicketTypes($eventID) {
-        $query = "SELECT * FROM tickets JOIN events ON tickets.eventID = events.eventID WHERE events.eventID = ?";
+        $query = "SELECT tickets.description as ticketDescription, price, ticketID FROM tickets JOIN events ON tickets.eventID = events.eventID WHERE events.eventID = ?";
 
         $params = array(
             array(
@@ -53,8 +53,8 @@ class ticketsDBController extends dbController
         return $this->getDBResult($query, $params);
     }
 
-    function updateTicketType($ticketID, $description, $price, $eventID) {
-        $query = "UPDATE tickets SET description = ?, price = ?, eventID = ? where ticketID = ?";
+    function updateTicketType($description, $price, $eventID) {
+        $query = "UPDATE tickets SET description = ?, price = ? where $eventID = ?";
 
         $params = array(
             array(
@@ -68,10 +68,6 @@ class ticketsDBController extends dbController
             array(
                 "param_type" => "i",
                 "param_value" => $eventID
-            ),
-            array(
-                "param_type" => "i",
-                "param_value" => $ticketID
             )
         );
         $this->updateDB($query, $params);

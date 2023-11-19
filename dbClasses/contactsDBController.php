@@ -42,8 +42,8 @@ class contactsDBController extends dbController
         return $this->getDBResult($query, $params);
     }
 
-    function updateContact($contactID, $firstName, $lastName, $phoneNumber, $email, $eventID) {
-        $query = "UPDATE contacts SET firstName = ?, lastName = ?, phoneNumber = ?, email = ?, eventID = ? WHERE contactID = ?";
+    function updateContact($firstName, $lastName, $phoneNumber, $email, $eventID) {
+        $query = "UPDATE contacts SET firstName = ?, lastName = ?, phoneNumber = ?, email = ? WHERE eventID = ?";
 
         $params = array(
             array(
@@ -65,10 +65,6 @@ class contactsDBController extends dbController
             array(
                 "param_type" => "i",
                 "param_value" => $eventID
-            ),
-            array(
-                "param_type" => "i",
-                "param_value" => $contactID
             )
         );
         $this->updateDB($query, $params);

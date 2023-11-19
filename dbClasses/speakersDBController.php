@@ -133,17 +133,13 @@ class speakersDBController extends dbController
         $this->updateDB($query, $params);
     }
 
-    function deleteEventSpeaker($eventID, $speakerID) {
-        $query = "DELETE FROM eventsspeakers WHERE eventID = ? AND speakerID = ?";
+    function deleteEventSpeakers($eventID) {
+        $query = "DELETE FROM eventsspeakers WHERE eventID = ?";
 
         $params = array(
             array(
                 "param_type" => "i",
                 "param_value" => $eventID
-            ),
-            array(
-                "param_type" => "i",
-                "param_value" => $speakerID
             )
         );
         $this->updateDB($query, $params);

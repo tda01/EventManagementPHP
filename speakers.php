@@ -55,20 +55,22 @@
             $speakersController = new speakersDBController();
             $speakers = $speakersController->getAllSpeakers();
 
-            foreach ($speakers as $speaker) {
-                echo "<tr>";
-                echo "<td>".$speaker["speakerID"]."</td>";
-                echo "<td>".$speaker["img"]."</td>";
-                echo "<td>".$speaker["firstName"]."</td>";
-                echo "<td>".$speaker["lastName"]."</td>";
-                echo "<td>".$speaker["description"]."</td>";
-                echo "<td>".$speaker["occupation"]."</td>";
-                echo "<td>".$speaker["email"]."</td>";
-                echo '<td>
+            if (!empty($speakers)) {
+                foreach ($speakers as $speaker) {
+                    echo "<tr>";
+                    echo "<td>".$speaker["speakerID"]."</td>";
+                    echo "<td>".$speaker["img"]."</td>";
+                    echo "<td>".$speaker["firstName"]."</td>";
+                    echo "<td>".$speaker["lastName"]."</td>";
+                    echo "<td>".$speaker["description"]."</td>";
+                    echo "<td>".$speaker["occupation"]."</td>";
+                    echo "<td>".$speaker["email"]."</td>";
+                    echo '<td>
                            <a href="CRUD/edit/editSpeaker.php?id=' . $speaker["speakerID"] . '"><button class="edit-button"><i class="edit-button fa-solid fa-pen-to-square"></i></button></a>
                            <a href="CRUD/delete/deleteSpeaker.php?id='. $speaker["speakerID"].'"><button class="delete-button"><i class="fa-solid fa-trash"></i></button></a>
                     </td>';
-                echo "</tr>";
+                    echo "</tr>";
+                }
             }
         ?>
 

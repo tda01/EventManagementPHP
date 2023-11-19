@@ -38,13 +38,13 @@ class eventDaysDBController extends dbController
         $this->updateDB($query, $params);
     }
 
-    function deleteEventDay($eventDayID) {
-        $query = "DELETE FROM eventdays WHERE eventDayID = ?";
+    function deleteEventDays($eventID) {
+        $query = "DELETE FROM eventdays WHERE eventID = ?";
 
         $params = array(
             array(
                 "param_type" => "i",
-                "param_value" => $eventDayID
+                "param_value" => $eventID
             )
         );
         $this->updateDB($query, $params);

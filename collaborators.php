@@ -53,20 +53,22 @@
             $collaboratorsController = new collaboratorsDBController();
             $collaborators = $collaboratorsController->getAllCollaborators();
 
-            foreach ($collaborators as $collaborator) {
-                echo "<tr>";
-                echo "<td>".$collaborator["collaboratorID"]."</td>";
-                echo "<td>".$collaborator["img"]."</td>";
-                echo "<td>".$collaborator["name"]."</td>";
-                echo "<td>".$collaborator["phoneNumber"]."</td>";
-                echo "<td>".$collaborator["email"]."</td>";
-                echo "<td>".$collaborator["website"]."</td>";
-                echo "<td>".$collaborator["type"]."</td>";
-                echo '<td>
+            if(!empty($collaborators)) {
+                foreach ($collaborators as $collaborator) {
+                    echo "<tr>";
+                    echo "<td>".$collaborator["collaboratorID"]."</td>";
+                    echo "<td>".$collaborator["img"]."</td>";
+                    echo "<td>".$collaborator["name"]."</td>";
+                    echo "<td>".$collaborator["phoneNumber"]."</td>";
+                    echo "<td>".$collaborator["email"]."</td>";
+                    echo "<td>".$collaborator["website"]."</td>";
+                    echo "<td>".$collaborator["type"]."</td>";
+                    echo '<td>
                            <a href="CRUD/edit/editCollaborator.php?id=' . $collaborator["collaboratorID"] . '"><button class="edit-button"><i class="edit-button fa-solid fa-pen-to-square"></i></button></a>
                            <a href="CRUD/delete/deleteCollaborator.php?id='. $collaborator["collaboratorID"].'"><button class="delete-button"><i class="fa-solid fa-trash"></i></button></a>
                     </td>';
-                echo "</tr>";
+                    echo "</tr>";
+                }
             }
         ?>
         </tbody>
@@ -79,12 +81,12 @@
         <h2>Add New Collaborator</h2>
         <div>
             <label>Name</label>
-            <input type="text" name="name" value=""required/>
+            <input type="text" name="name" required/>
         </div>
         <div>
             <label>Collaborator Type</label>
-            <input type="radio" name="collaboratorType" id="r-1" value="Partner" required/><label for="r-1">Partner</label>
-            <input type="radio" name="collaboratorType" id="r-2" value="Sponsor" required/><label for="r-2">Sponsor</label>
+            <input type="radio" name="collaboratorType" id="r-1" value="Partner" required /><label for="r-1">Partner</label>
+            <input type="radio" name="collaboratorType" id="r-2" value="Sponsor" required /><label for="r-2">Sponsor</label>
         </div>
         <div>
             <label>Email</label>
