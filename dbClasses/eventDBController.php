@@ -7,6 +7,11 @@ class eventDBController extends dbController
         return $this->getDBResult($query);
     }
 
+    function getLastInsertedEvent() {
+        $query = "SELECT * FROM events WHERE eventID = LAST_INSERT_ID()";
+        return $this->getDBResult($query);
+    }
+
     function getEvent($eventID) {
         $query = "SELECT * FROM events WHERE eventID = ?";
 

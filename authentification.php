@@ -27,7 +27,7 @@
                 $_SESSION["name"] = $_POST["username"];
                 $_SESSION["id"] = $userID;
                 echo "Bine ati venit".$_SESSION["name"]."!";
-                header("Location: home.php");
+                header("Location: controlPanel.php");
             } else {
                 echo "Nume sau parola incorecte!";
             }

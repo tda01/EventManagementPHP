@@ -78,4 +78,21 @@ class activitiesDBController extends dbController
         return $this->getDBResult($query, $params);
     }
 
+    function getActivity($activityID) {
+        $query = "SELECT * FROM activities WHERE activityID =?";
+
+        $params = array(
+            array(
+                "param_type" => "i",
+                "param_value" => $activityID
+            )
+        );
+        return $this->getDBResult($query, $params);
+    }
+
+    function getAllActivities() {
+        $query = "SELECT * FROM activities";
+        return $this->getDBResult($query);
+    }
+
 }

@@ -83,26 +83,24 @@ class speakersDBController extends dbController
         $this->updateDB($query, $params);
     }
 
-    function getSpeaker($firstName, $lastName, $email)
+    function getSpeaker($speakerID)
     {
-        $query = "SELECT * FROM speakers WHERE firstName = ? AND lastName = ? AND $email = ?";
+        $query = "SELECT * FROM speakers WHERE speakerID = ?";
 
         $params = array(
             array(
-                "param_type" => "s",
-                "param_value" => $firstName
-            ),
-            array(
-                "param_type" => "s",
-                "param_value" => $lastName
-            ),
-            array(
-                "param_type" => "s",
-                "param_value" => $email
+                "param_type" => "i",
+                "param_value" => $speakerID
             )
         );
         return $this->getDBResult($query, $params);
     }
+
+    function getAllSpeakers() {
+        $query = "SELECT * FROM speakers";
+        return $this->getDBResult($query);
+    }
+
 
     function getEventSpeakers($eventID) {
 
@@ -135,17 +133,13 @@ class speakersDBController extends dbController
         $this->updateDB($query, $params);
     }
 
-    function deleteEventSpeaker($eventID, $speakerID) {
-        $query = "DELETE FROM eventsspeakers WHERE eventID = ? AND speakerID = ?";
+    function deleteEventSpeakers($eventID) {
+        $query = "DELETE FROM eventsspeakers WHERE eventID = ?";
 
         $params = array(
             array(
                 "param_type" => "i",
                 "param_value" => $eventID
-            ),
-            array(
-                "param_type" => "i",
-                "param_value" => $speakerID
             )
         );
         $this->updateDB($query, $params);
