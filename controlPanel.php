@@ -101,8 +101,10 @@
 
                     echo "<td>".$event["location"]."</td>";
                     echo '<td>
+                           <a href="home.php?id=' . $event["eventID"] . '"><button class="view-button"><i class="fa-solid fa-eye"></i></button></a>
                            <a href="CRUD/edit/editEvent.php?id=' . $event["eventID"] . '"><button class="edit-button"><i class="edit-button fa-solid fa-pen-to-square"></i></button></a>
                            <a href="CRUD/delete/deleteEvent.php?id='. $event["eventID"].'"><button class="delete-button"><i class="fa-solid fa-trash"></i></button></a>
+                           
                     </td>';
                     echo "</tr>";
                 }
@@ -116,7 +118,7 @@
 <!-- Add Event Popup -->
 <div class="popup" id="addPopup">
     <form action="CRUD/insert/insertActivity.php" method="post">
-        <button class="closeBtn" id="closePopup">&times;</button>
+        <button type="button" class="closeBtn" id="closePopup">&times;</button>
         <h2>Add New Event</h2>
         <div>
             <label>Title</label>

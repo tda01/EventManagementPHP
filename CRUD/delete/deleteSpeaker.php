@@ -14,4 +14,6 @@ if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
     $speakersController = new speakersDBController();
     $speakersController->deleteSpeaker($id);
     header("Location: /ProiectPHP/collaborators.php");
+} else {
+    exit("ID-ul nu a fost primit");
 }

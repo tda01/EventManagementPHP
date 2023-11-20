@@ -188,7 +188,7 @@ section.speakers .card-grid .card:hover p {
 .btn-primary {
     background-color: #347572;
     color: #D7E0CE;
-    margin-top: -15rem;
+    margin-top: 0rem;
 }
 
 .btn-primary:hover {

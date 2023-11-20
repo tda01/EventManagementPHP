@@ -14,4 +14,6 @@ if (isset($_GET["id"]) && is_numeric($_GET["id"])) {
     $eventController = new eventDBController();
     $eventController->deleteEvent($id);
     header("Location: /ProiectPHP/controlPanel.php");
+} else {
+    exit("ID-ul nu a fost primit");
 }
