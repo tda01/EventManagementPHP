@@ -26,6 +26,16 @@ button:active {
     transform: scale(0.95);
 }
 
+.view-button {
+    background-color: white;
+    color: #091c1b;
+}
+
+.view-button:hover {
+    background-color: #bbb;
+    color: black;
+}
+
 .edit-button {
     background-color: #1F5F5B;
 }

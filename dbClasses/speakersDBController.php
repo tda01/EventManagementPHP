@@ -104,7 +104,7 @@ class speakersDBController extends dbController
 
     function getEventSpeakers($eventID) {
 
-        $query = "SELECT * FROM speakers INNER JOIN eventsspeakers ON speakers.speakerID = eventsspeakers.speakerID INNER JOIN 
+        $query = "SELECT speakers.speakerID, speakers.firstName, speakers.lastName, speakers.description AS speakerDescription, speakers.occupation, speakers.email, speakers.img AS speakerImg FROM speakers INNER JOIN eventsspeakers ON speakers.speakerID = eventsspeakers.speakerID INNER JOIN 
     events ON eventsspeakers.eventID = events.eventID WHERE events.eventID = ?";
 
         $params = array(

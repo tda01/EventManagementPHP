@@ -71,6 +71,11 @@
             $startDate = new DateTime($startDate);
             $endDate = new DateTime($endDate);
             $dateRange = [];
+
+            if ($startDate > $endDate) {
+                exit("Data nu este introdusa corect");
+            }
+
             while ($startDate <= $endDate) {
                 $dateRange[] = $startDate->format('Y-m-d');
                 $startDate->modify('+1 day');
