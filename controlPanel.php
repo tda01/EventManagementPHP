@@ -5,10 +5,11 @@
 
     session_start();
 
-    if (!isset($_SESSION["loggedin"])) {
+    if (!isset($_SESSION["loggedin"]) || !isset($_SESSION["rol"])) {
         header("Location: login.html");
         exit;
     }
+
 
     $eventsController = new eventDBController();
     $speakersController = new speakersDBController();
@@ -37,12 +38,16 @@
 
 <div class="table">
     <div class="table-header">
-        <p>Events Details</p>
+        <p>Events</p>
         <div>
-            <button class="new-event" id="addEvent">+ New Event</button>
+            <?php
+                if ($_SESSION["rol"] == "admin") {
+                    echo '            <button class="new-event" id="addEvent">+ New Event</button>
             <a href="speakers.php"><button class="new-event" id="addEvent">Speakers</button></a>
             <a href="collaborators.php"><button class="new-event" id="addEvent">Collaborators</button></a>
-            <a href="activities.php"><button class="new-event" id="addEvent">Activities</button></a>
+            <a href="activities.php"><button class="new-event" id="addEvent">Activities</button></a>';
+                }
+            ?>
             <a href="logout.php"><button class="new-event" id="addEvent"> Logout</button></a>
         </div>
     </div>
@@ -53,7 +58,11 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th>
+            <?php
+            if ($_SESSION["rol"] == "admin") {
+                echo '<th>ID</th>';
+            }
+            ?>
             <th>Image</th>
             <th>Event</th>
             <th>Description</th>
@@ -71,7 +80,9 @@
             if (!empty($events)) {
                 foreach ($events as $event) {
                     echo "<tr>";
-                    echo "<td>".$event["eventID"]."</td>";
+                    if ($_SESSION["rol"] == "admin") {
+                        echo "<td>".$event["eventID"]."</td>";
+                    }
                     echo "<td>".$event["img"]."</td>";
                     echo "<td>".$event["title"]."</td>";
                     echo "<td>".$event["description"]."</td>";
@@ -100,12 +111,19 @@
 
 
                     echo "<td>".$event["location"]."</td>";
-                    echo '<td>
+
+                    if ($_SESSION["rol"] == "admin") {
+                        echo '<td>
                            <a href="home.php?id=' . $event["eventID"] . '"><button class="view-button"><i class="fa-solid fa-eye"></i></button></a>
                            <a href="CRUD/edit/editEvent.php?id=' . $event["eventID"] . '"><button class="edit-button"><i class="edit-button fa-solid fa-pen-to-square"></i></button></a>
                            <a href="CRUD/delete/deleteEvent.php?id='. $event["eventID"].'"><button class="delete-button"><i class="fa-solid fa-trash"></i></button></a>
                            
                     </td>';
+                    } else {
+                        echo '<td>
+                           <a href="home.php?id=' . $event["eventID"] . '"><button class="view-button"><i class="fa-solid fa-eye"></i></button></a>
+                    </td>';
+                    }
                     echo "</tr>";
                 }
             }

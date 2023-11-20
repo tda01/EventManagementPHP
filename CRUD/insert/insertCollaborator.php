@@ -2,7 +2,12 @@
 require_once('../../dbClasses/collaboratorsDBController.php');
 session_start();
 
-if (!isset($_SESSION["loggedin"])) {
+if (!isset($_SESSION["loggedin"]) || !isset($_SESSION["rol"])) {
+    header("Location: /ProiectPHP/login.html");
+    exit;
+}
+
+if ($_SESSION["rol"] != "admin") {
     header("Location: /ProiectPHP/login.html");
     exit;
 }

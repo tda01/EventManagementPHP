@@ -41,9 +41,10 @@
         if ($stmt->num_rows > 0) {
             echo "Username-ul deja exista, alegeti altul";
         } else {
-            if($stmt = $connection->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)")) {
+            if($stmt = $connection->prepare("INSERT INTO users (username, password, email, rol) VALUES (?, ?, ?, ?)")) {
                 $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-                $stmt->bind_param("sss", $_POST["username"], $password, $_POST["email"]);
+                $rol = "user";
+                $stmt->bind_param("ssss", $_POST["username"], $password, $_POST["email"], $rol);
                 $stmt->execute();
                 echo "Utilizatorul a fost inregistrat cu succes!";
 
@@ -52,6 +53,8 @@
                 $_SESSION["loggedin"] = TRUE;
                 $_SESSION["name"] = $_POST["username"];
                 $_SESSION["id"] = $newUserID;
+                $_SESSION["rol"] = $rol;
+
                 header("Location: controlPanel.php");
 
             } else {

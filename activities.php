@@ -128,7 +128,7 @@
                 ?>
             </select>
         </div>
-        <button type="submit" id="addBtn">Add Speaker</button>
+        <button type="submit" id="addBtn">Add Activity</button>
     </form>
 </div>
 
