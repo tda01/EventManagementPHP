@@ -52,6 +52,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($endDate)) {
         $startDate = new DateTime($startDate);
         $endDate = new DateTime($endDate);
+
+        if ($startDate > $endDate) {
+            exit("Data nu este introdusa corect");
+        }
+
         $dateRange = [];
         while ($startDate <= $endDate) {
             $dateRange[] = $startDate->format('Y-m-d');

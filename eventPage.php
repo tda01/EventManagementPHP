@@ -55,7 +55,7 @@ class eventPage
         echo '</div>
             </div>
             <div class="right">
-                                <a href="controlPanel.php"><button class="btn btn-primary" id="btnControlPanel">Control Panel</button></a>
+             <a href="controlPanel.php"><button class="btn btn-primary" id="btnControlPanel">Control Panel</button></a>
             </div>
         </nav>
     </div>

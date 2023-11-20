@@ -18,22 +18,31 @@
     $daysController = new eventDaysDBController();
     $days = $daysController->getEventDays($id);
 
-    $startDate = $days[0]["day"];
-    $startDate = strtotime($startDate);
-    $startDate = date("d - F Y", $startDate);
 
-    for ($i = 1; $i < sizeof($days); $i++) {
-        $endDate = $days[$i]["day"];
-}
+    if (!empty($days)) {
+        $startDate = $days[0]["day"];
+        $startDate = strtotime($startDate);
+        $startDate = date("d - F Y", $startDate);
+
+        for ($i = 1; $i < sizeof($days); $i++) {
+            $endDate = $days[$i]["day"];
+        }
+
+        $daysString = $startDate;
+        if (!empty($endDate)) {
+            $endDate = strtotime($endDate);
+            $endDate = date("d - F Y", $endDate);
+            $daysString = $daysString." — ".$endDate;
+        }
+    } else {
+        $daysString = "Nu exista data";
+    }
+
 
     $event = $eventController->getEvent($id);
     $style = "event.css";
-    $daysString = $startDate;
-    if (!empty($endDate)) {
-        $endDate = strtotime($endDate);
-        $endDate = date("d - F Y", $endDate);
-        $daysString = $daysString." — ".$endDate;
-    }
+
+
 
     $allSpeakers = $speakerController->getEventSpeakers($id);
 
@@ -55,7 +64,7 @@
             <h1>About <span>Event</span></h1>
             <p>'. htmlentities($event[0]["description"]).'
             </p>
-              <h1>Durata <span>Event</span></h1>
+              <h1>Event <span>Date</span></h1>
             <h2>'. $daysString .'</h2>
         </div>
     </div>
