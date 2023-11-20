@@ -13,12 +13,12 @@
         exit("Datele de logare nu au fost obtinute");
     }
 
-    if ($stmt = $connection->prepare("SELECT userID, password, rol FROM users WHERE username = ?")) {
+    if ($stmt = $connection->prepare("SELECT userID, password, rol, email FROM users WHERE username = ?")) {
         $stmt->bind_param("s", $_POST["username"]);
         $stmt->execute();
         $stmt->store_result();
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($userID, $password, $rol);
+            $stmt->bind_result($userID, $password, $rol, $email);
             $stmt->fetch();
 
             if (password_verify($_POST["password"], $password)) {
@@ -27,6 +27,7 @@
                 $_SESSION["name"] = $_POST["username"];
                 $_SESSION["id"] = $userID;
                 $_SESSION["rol"] = $rol;
+                $_SESSION["email"] = $email;
                 echo "Bine ati venit".$_SESSION["name"]."!";
                 header("Location: controlPanel.php");
             } else {

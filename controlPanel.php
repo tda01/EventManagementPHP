@@ -135,7 +135,7 @@
 
 <!-- Add Event Popup -->
 <div class="popup" id="addPopup">
-    <form action="CRUD/insert/insertActivity.php" method="post">
+    <form action="CRUD/insert/insertEvent.php" method="post">
         <button type="button" class="closeBtn" id="closePopup">&times;</button>
         <h2>Add New Event</h2>
         <div>

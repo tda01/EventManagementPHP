@@ -96,8 +96,9 @@
 </section>
     ';
 
-
-    $pageGenerator = new eventPage($event[0], $style, $content);
+    $keywordsContent = $event[0]["title"];
+    $keywords = '<meta name="keywords" content="'. $keywordsContent. '">';
+    $pageGenerator = new eventPage($event[0], $style, $content, $keywords);
     $pageGenerator->displayPage();
 
 

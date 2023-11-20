@@ -5,13 +5,15 @@ class eventPage
     private $event;
     private $style;
     private $buttons = array("Home" => "home.php", "Agenda" => "agenda.php", "Speakers" => "eventSpeakers.php",
-        "Partners" => "eventPartners.php", "Contact" => "contact.php");
+        "Partners" => "eventPartners.php", "Contact" => "contact.php", "Tickets" => "tickets.php");
 
+    private $keywords;
     private $content;
-    function __construct($event, $style, $content) {
+    function __construct($event, $style, $content, $keywords) {
         $this->event = $event;
         $this->style = $style;
         $this->content = $content;
+        $this->keywords = $keywords;
     }
 
     function displayPage() {
@@ -39,6 +41,7 @@ class eventPage
 
     function displayMeta() {
             echo '<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">';
+            echo $this->keywords;
     }
 
     function displayNavBar() {
@@ -55,7 +58,7 @@ class eventPage
         echo '</div>
             </div>
             <div class="right">
-             <a href="controlPanel.php"><button class="btn btn-primary" id="btnControlPanel">Control Panel</button></a>
+             <a href="controlPanel.php"><button class="btn btn-primary" id="btnControlPanel">ALL EVENTS</button></a>
             </div>
         </nav>
     </div>

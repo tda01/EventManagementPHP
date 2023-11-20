@@ -74,23 +74,25 @@
         $daysController->deleteEventDays($id);
 
         if (!empty($endDate)) {
-            $startDate = new DateTime($startDate);
-            $endDate = new DateTime($endDate);
-            $dateRange = [];
+            $startDateObject = new DateTime($startDate);
+            $endDateObject = new DateTime($endDate);
 
-            if ($startDate > $endDate) {
+            if ($startDateObject > $endDateObject) {
                 exit("Data nu este introdusa corect");
             }
 
-            while ($startDate <= $endDate) {
-                $dateRange[] = $startDate->format('Y-m-d');
-                $startDate->modify('+1 day');
+            $dateRange = [];
+            $currentDate = clone $startDateObject;
+            while ($currentDate <= $endDateObject) {
+                $dateRange[] = $currentDate->format('Y-m-d');
+                $currentDate->modify('+1 day');
             }
-            foreach($dateRange as $day) {
+            foreach ($dateRange as $day) {
                 $daysController->insertEventDay($day, $id);
             }
         } else {
-            $daysController->insertEventDay($startDate, $id);
+            $date = $startDate;
+            $daysController->insertEventDay($date, $id);
         }
 
         // Tickets

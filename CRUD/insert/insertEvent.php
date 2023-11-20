@@ -5,6 +5,14 @@ require_once ('../../dbClasses/contactsDBController.php');
 require_once ('../../dbClasses/speakersDBController.php');
 require_once ('../../dbClasses/collaboratorsDBController.php');
 require_once ('../../dbClasses/eventDaysDBController.php');
+require_once ('../../dbClasses/usersDBController.php');
+
+use PHPMailer\PHPMailer\PHPMailer;
+
+require '../../phpMailer/src/Exception.php';
+require '../../phpMailer/src/PHPMailer.php';
+require '../../phpMailer/src/SMTP.php';
+
 
 session_start();
 
@@ -38,6 +46,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $lastInsertedEvent = $eventController->getLastInsertedEvent();
     $lastInsertedEventID = $lastInsertedEvent[0]["eventID"];
 
+    // Send mail to users
+
+
+    $mail = new PHPMailer(true);
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'vlad.12.moise.3@gmail.com';
+        $mail->Password   = 'ybcgjskmfdciewkm';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port       = 465;
+
+        $mail->setFrom('vlad.12.moise.3@gmail.com');
+
+        //Content
+        $mail->isHTML(true);
+        $subiect = 'Invitatie eveniment '.$title;
+        $mail->Subject = $subiect;
+        $mail->Body    = '<h1>Esti invitat la eveniment!</h1>';
+        $mail->AltBody = 'Invitatie eveniment';
+
+        $userController = new usersDBController();
+        $userMails = $userController->getUserMails();
+
+        if(!empty($userMails)) {
+            foreach ($userMails as $email) {
+                $mailToSend = $email["email"];
+                $mail->addAddress($mailToSend);
+                $mail->send();
+            }
+        }
+
+
 
     // Event days
 
@@ -56,23 +98,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $daysController = new eventDaysDBController();
 
     if (!empty($endDate)) {
-        $startDate = new DateTime($startDate);
-        $endDate = new DateTime($endDate);
+        $startDateObject = new DateTime($startDate);
+        $endDateObject = new DateTime($endDate);
 
-        if ($startDate > $endDate) {
+        if ($startDateObject > $endDateObject) {
             exit("Data nu este introdusa corect");
         }
 
         $dateRange = [];
-        while ($startDate <= $endDate) {
-            $dateRange[] = $startDate->format('Y-m-d');
-            $startDate->modify('+1 day');
+        $currentDate = clone $startDateObject;
+        while ($currentDate <= $endDateObject) {
+            $dateRange[] = $currentDate->format('Y-m-d');
+            $currentDate->modify('+1 day');
         }
-        foreach($dateRange as $day) {
+        foreach ($dateRange as $day) {
             $daysController->insertEventDay($day, $lastInsertedEventID);
         }
     } else {
-        $date = $startDate->format('Y-m-d');
+        $date = $startDate;
         $daysController->insertEventDay($date, $lastInsertedEventID);
     }
 

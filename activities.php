@@ -7,10 +7,15 @@
 
     session_start();
 
-    if (!isset($_SESSION["loggedin"])) {
-        header("Location: login.html");
-        exit;
-    }
+if (!isset($_SESSION["loggedin"]) || !isset($_SESSION["rol"])) {
+    header("Location: /ProiectPHP/login.html");
+    exit;
+}
+
+if ($_SESSION["rol"] != "admin") {
+    header("Location: /ProiectPHP/controlPanel.php");
+    exit;
+}
 
 
     $activityController = new activitiesDBController();

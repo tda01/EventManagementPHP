@@ -145,6 +145,42 @@ section.about p {
     line-height: 1.9rem;
 }
 
+
+/* Register Page */
+section.register {
+    background: #121617;
+}
+
+section.register h1 {
+    margin-bottom: 2.5rem;
+    line-height: 0.5rem;
+    color: #347572;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.input-group {
+    margin-bottom: 2rem;
+}
+
+.input-group input {
+    background-color: #EEE;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 50%;
+    color: #444;
+    border: 1px solid #C0C4C9;
+    border-bottom: 2px solid #C0C4C9;
+    border-radius: 4px;
+    outline: 1px solid transparent;
+    transition:all .15s ease-out;
+}
+
+.input-group input:focus {
+    outline-color: #4E966c;
+}
+
+
 /* Utilities */
 .flex {
     display: flex;
@@ -190,14 +226,26 @@ section.about p {
     color: #347572;
 }
 
+.btn-secondary {
+    background: transparent;
+    color: #347572;
+    border-color: #347572;
+}
+
+.btn-secondary:hover {
+    background: #347572;
+    color: #D7E0CE;
+}
+
 .flex-1 {
     flex: 1;
 }
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
-a:visited {
+a:hover {
     color: inherit;
 }

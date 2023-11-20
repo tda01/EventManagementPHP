@@ -52,6 +52,7 @@
 
                 $_SESSION["loggedin"] = TRUE;
                 $_SESSION["name"] = $_POST["username"];
+                $_SESSION["email"] = $_POST["email"];
                 $_SESSION["id"] = $newUserID;
                 $_SESSION["rol"] = $rol;
 
